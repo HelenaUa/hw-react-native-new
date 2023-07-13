@@ -8,8 +8,8 @@ export default function App() {
    return (
      <View style={styles.container}>
        <ImageBackground style={styles.image} source={require('./assets/images/PhotoBG.png')}>
-         <RegistrationScreen></RegistrationScreen>
-         {/* <LoginScreen></LoginScreen> */}
+         {/* <RegistrationScreen></RegistrationScreen> */}
+         <LoginScreen></LoginScreen>
        </ImageBackground>
       <StatusBar style="auto" />
     </View>
@@ -20,16 +20,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    // alignItems: 'center',
-    // justifyContent: 'center',
-    alignItems: 'flex-end',
-    justifyContent: 'flex-end',
   },
   image: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     resizeMode: 'cover',
-    alignItems: 'flex-end',
   },
 });
 

@@ -30,7 +30,8 @@ const initialState = {
 export default function RegistrationScreen() {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
-  const [activeInput,setActiveInput]=useState('');
+  const [activeInput, setActiveInput] = useState('');
+  const [seePass, setSeePass] = useState(true);
   const [dimentions, setDimentions] = useState(
     Dimensions.get("window").width - 16 * 2
   );
@@ -77,20 +78,16 @@ export default function RegistrationScreen() {
   //   setIsShowKeyboard(false)
   // }, [keyboardHide]);
 
-    return (
-        <TouchableWithoutFeedback onPress={closeKeyboard}>
-            <View style={{ ...styles.container, height: isShowKeyboard ? 375 : 549 }}>
-
-                {/* <View>
-                    <TouchableOpacity>
-
-                    </TouchableOpacity>
-                </View>
-
-                <Text>Ргістрація</Text> */}
-
-                <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-                  <View style={{ ...styles.form, width: dimentions, marginBottom: isShowKeyboard ? 32 : 43 }}>
+  return (
+     
+    <TouchableWithoutFeedback onPress={closeKeyboard}>
+      
+        
+            <View style={{ ...styles.container, height: isShowKeyboard ? 375 : 549}}>
+              <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+             
+                
+          <View style={{...styles.form, width: dimentions, marginBottom: isShowKeyboard ? 16 : 27 }}>
                      
                     <View style={styles.header}>
                       <Image source={Avatar} style={styles.avatar} />
@@ -124,46 +121,49 @@ export default function RegistrationScreen() {
                     <View>
                       <TextInput style={{ ...styles.input, borderColor:activeInput==='password'?'#FF6C00':'#f6f6f6'}}
                                 textAlign={"flex-start"}
-                                secureTextEntry={true}
+                                secureTextEntry={seePass}
                                 value={state.password}
                                 placeholder='Пароль'
-                                onChangeText={(value) => setState((prevState) => ({...prevState, password: value}))}
+                                onChangeText={(value) => setState((prevState) => ({ ...prevState, password: value }))}
                                 onFocus={() => setActiveInput('password')}
                                 placeholderTextColor='#BDBDBD'
                       />
-                            {/* <Text>Показати</Text> */}
+                      <Text style={{ ...styles.seePass, color: '#1B4371', right: 32}} onPress ={()=> setSeePass(false)} >Показати</Text>
                     </View>
                   </View>
-                </KeyboardAvoidingView>
+                
           
           {!activeInput && (
-            <View style={{ ...styles.down, marginBottom: isShowKeyboard ? 32 : 43 }}>
+            <View style={{ ...styles.down, marginBottom: isShowKeyboard ? 16 : 27 }}>
               <TouchableOpacity style={styles.btn}
                                 onPress={keyboardHide}
                                 activeOpacity={0.6}>
                     <Text style={styles.btnTitle}>Зареєструватися</Text>
               </TouchableOpacity>
               {/* <Text>Уже есть аккаунт? Войти</Text> */}
-              <View style={styles.askLogo}>
-                  <Text style={textAlign="center"}>Вже є акаунт? Увійти</Text>
+              <View>
+                  <Text style={styles.askLogo}>Вже є акаунт? Увійти</Text>
               </View>
             </View>
           )}
-                
-            </View>
-        </TouchableWithoutFeedback>
+            </KeyboardAvoidingView>    
+          </View>
+           
+      </TouchableWithoutFeedback>
+     
     )
 };
 
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.67,
+    flex: 0.7,
     backgroundColor: "#fff",
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
+    // position: 'relative',
     // alignItems: 'flex-end',
-    justifyContent: 'flex-end',
+    // justifyContent: 'flex-end',
   },
   form: {
     marginHorizontal: 16,
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
   header: {
     alignItems: 'center',
     marginTop: 92,
-    marginBottom: 32,
+    marginBottom: 16,
   },
   avatar: {
     width: 120,
@@ -204,6 +204,11 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto-Regular',
     // justifyContent: 'flex-start',
   },
+  seePass: {
+    // color: '#1B4371'
+    position: 'absolute',
+    top:16,
+    }, 
   down: {
     
   },
@@ -217,8 +222,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     ...Platform.select({
       ios: {
-        backgroundColor: 'transparent',
-        borderColor: '#FF6C00',
+        backgroundColor: '#FF6C00',
+        borderColor: 'transparent',
       },
       android: {
         backgroundColor: '#FF6C00',
