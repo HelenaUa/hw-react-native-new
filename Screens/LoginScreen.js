@@ -23,12 +23,12 @@ export default function LoginScreen() {
     const [isShowKeyboard, setIsShowKeyboard] = useState(false);
     const [state, setState] = useState(initialState);
     const [seePass, setSeePass] = useState(true);
-     const [activeInput, setActiveInput] = useState('');
+    const [activeInput, setActiveInput] = useState('');
     const [dimentions, setDimentions] = useState(
     Dimensions.get("window").width - 16 * 2
     );
 
-     useEffect(() => {
+  useEffect(() => {
     const subscription = Dimensions.addEventListener("change", (window) => {
       setDimentions(window.width);
     });
@@ -41,34 +41,29 @@ export default function LoginScreen() {
   
   if (!fontsLoaded) {
     return null;
-    };
+  };
     
-    // useEffect(() => {
-    //     setIsShowKeyboard(false)
-    // }, [keyboardHide])
-    
-    const closeKeyboard = () => {
-    Keyboard.dismiss();
-    setIsShowKeyboard(false);
-    };
+  const closeKeyboard = () => {
+  Keyboard.dismiss();
+  setIsShowKeyboard(false);
+  };
 
-    const keyboardHide = () => {
-    setIsShowKeyboard(false);
-    Keyboard.dismiss();
-    console.log(state);
-    setState(initialState);
+  const keyboardHide = () => {
+  setIsShowKeyboard(false);
+  Keyboard.dismiss();
+  console.log(state);
+  setState(initialState);
   };
     
     return (
         <TouchableWithoutFeedback onPress={closeKeyboard}>
-            <View style={{ ...styles.container, height: isShowKeyboard ? 248 : 489}}>
-                <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+            <View style={{ ...styles.container, flex: isShowKeyboard ? 0.58 : 0.75}}>
+                <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}>
              
-                
-               <View style={{...styles.form, width: dimentions, marginBottom: isShowKeyboard ? 16 : 27 }}>
+                  <View style={{...styles.form, width: dimentions, marginBottom: isShowKeyboard ? 16 : 27}}>
                      
                     <View style={styles.header}>
-                      <Text style={{ fontFamily: 'Roboto-Regular', fontSize: 30, color: '#212121' }}>Увійти</Text>
+                      <Text style={{ fontFamily: 'Roboto-Regular', fontSize: 30, fontWeight: 500, color: '#212121' }}>Увійти</Text>
                     </View>
               
                     <View>
@@ -95,20 +90,20 @@ export default function LoginScreen() {
                     </View>
                   </View>
                 
-          {!activeInput && (
-            <View style={{ ...styles.down, marginBottom: isShowKeyboard ? 16 : 27 }}>
-              <TouchableOpacity style={styles.btn}
+                {!activeInput && (
+                  <View style={{ ...styles.down, marginBottom: isShowKeyboard ? 16 : 27 }}>
+                    <TouchableOpacity style={styles.btn}
                                 onPress={keyboardHide}
                                 activeOpacity={0.6}>
-                    <Text style={styles.btnTitle}>Зареєструватися</Text>
-              </TouchableOpacity>
-              
-              <View>
-                  <Text style={styles.askLogo}>Немає акаунту? Зареєструватися</Text>
-              </View>
+                      <Text style={styles.btnTitle}>Зареєструватися</Text>
+                    </TouchableOpacity>
+                  <View>
+                    <Text style={styles.askLogo}>Немає акаунту? Зареєструватися</Text>
+                  </View>
             </View>
-          )}
-            </KeyboardAvoidingView>    
+            )}
+            
+                </KeyboardAvoidingView>    
             </View> 
         </TouchableWithoutFeedback>
     )
@@ -116,13 +111,10 @@ export default function LoginScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.7,
+    // flex: 0.7,
     backgroundColor: "#fff",
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
-    // position: 'relative',
-    // alignItems: 'flex-end',
-    // justifyContent: 'flex-end',
   },
   form: {
     marginHorizontal: 16,
@@ -130,26 +122,8 @@ const styles = StyleSheet.create({
   },
   header: {
     alignItems: 'center',
-    marginTop: 92,
-    marginBottom: 16,
-  },
-  avatar: {
-    width: 120,
-    height: 120,
-    borderRadius: 16,
-    position: 'absolute',
-    top: -154,
-    backgroundColor: '#f6f6f6',
-  },
-  addImage: {
-  
-  },
-  addAvatar: {
-    position: 'absolute',
-    width: 25,
-    height: 25,
-    top: -78,
-    right: -72,
+    marginTop: 32,
+    marginBottom: 10,
   },
   input: {
     borderWidth: 1,
@@ -166,9 +140,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 16,
     }, 
-  down: {
-    
-  },
   btn: {
     height: 50,
     borderRadius: 100,
@@ -200,8 +171,4 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'Roboto-Regular',
   },
-  // header: {
-  //   alignItems: "center",
-  //   marginBottom: 120,
-  // },
 });
