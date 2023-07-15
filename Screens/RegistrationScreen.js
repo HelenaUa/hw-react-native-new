@@ -83,7 +83,6 @@ export default function RegistrationScreen() {
               
                     <View>
                       <TextInput style={{ ...styles.input, borderColor:activeInput==='login'?'#FF6C00':'#f6f6f6'}}
-                                textAlign={"flex-start"}
                                 value={state.name}
                                 placeholder='Логін'
                                 onChangeText={(value) => setState((prevState) => ({...prevState, name: value}))}
@@ -94,7 +93,6 @@ export default function RegistrationScreen() {
                     </View>
                     <View>
                       <TextInput style={{ ...styles.input, borderColor:activeInput==='email'?'#FF6C00':'#f6f6f6'}}
-                                textAlign={"flex-start"}
                                 value={state.email}
                                 placeholder='Адреса електронної пошти'
                                 onChangeText={(value) => setState((prevState) => ({...prevState, email: value}))}
@@ -104,7 +102,6 @@ export default function RegistrationScreen() {
                     </View>
                     <View>
                       <TextInput style={{ ...styles.input, borderColor:activeInput==='password'?'#FF6C00':'#f6f6f6'}}
-                                textAlign={"flex-start"}
                                 secureTextEntry={seePass}
                                 value={state.password}
                                 placeholder='Пароль'
@@ -116,7 +113,6 @@ export default function RegistrationScreen() {
                     </View>
                   </View>
                 
-                {!activeInput && (
                   <View style={{ ...styles.down, marginBottom: isShowKeyboard ? 16 : 27 }}>
                     <TouchableOpacity style={styles.btn}
                                 onPress={keyboardHide}
@@ -127,7 +123,7 @@ export default function RegistrationScreen() {
                       <Text style={styles.askLogo}>Вже є акаунт? Увійти</Text>
                     </View>
                   </View>
-                )}
+              
             </KeyboardAvoidingView>    
         </View>
            

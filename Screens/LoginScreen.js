@@ -68,7 +68,6 @@ export default function LoginScreen() {
               
                     <View>
                       <TextInput style={{ ...styles.input, borderColor: activeInput==='email'?'#FF6C00':'#f6f6f6'}}
-                                textAlign={"flex-start"}
                                 value={state.email}
                                 placeholder='Адреса електронної пошти'
                                 onChangeText={(value) => setState((prevState) => ({...prevState, email: value}))}
@@ -78,7 +77,6 @@ export default function LoginScreen() {
                     </View>
                     <View>
                       <TextInput style={{ ...styles.input, borderColor:activeInput==='password'?'#FF6C00':'#f6f6f6'}}
-                                textAlign={"flex-start"}
                                 secureTextEntry={seePass}
                                 value={state.password}
                                 placeholder='Пароль'
@@ -90,7 +88,6 @@ export default function LoginScreen() {
                     </View>
                   </View>
                 
-                {!activeInput && (
                   <View style={{ ...styles.down, marginBottom: isShowKeyboard ? 16 : 27 }}>
                     <TouchableOpacity style={styles.btn}
                                 onPress={keyboardHide}
@@ -101,7 +98,6 @@ export default function LoginScreen() {
                     <Text style={styles.askLogo}>Немає акаунту? Зареєструватися</Text>
                   </View>
             </View>
-            )}
             
                 </KeyboardAvoidingView>    
             </View> 
