@@ -18,13 +18,11 @@ import Avatar from '../assets/images/photo.png';
 import AddAvatar from '../assets/images/add.png';
 import CloseAvatar from '../assets/images/close.png';
 
-
 const initialState = {
   name: '',
   email: '',
   password: '',
 };
-
 
 
 export default function RegistrationScreen() {
@@ -35,15 +33,6 @@ export default function RegistrationScreen() {
   const [dimentions, setDimentions] = useState(
     Dimensions.get("window").width - 16 * 2
   );
-
-  // useEffect(() => {
-  //   const onChange = () => {
-  //     const width = Dimensions.get("window").width;
-  //     // console.log("width", width);
-  //     setDimentions(width);
-  //   };
-  //   Dimensions.addEventListener("change", onChange);
-  // }, []);
 
   useEffect(() => {
     const subscription = Dimensions.addEventListener("change", (window) => {
@@ -60,7 +49,9 @@ export default function RegistrationScreen() {
     return null;
   };
 
-  // const width = Dimensions.get('window').width;
+  // useEffect(() => {
+  //   setIsShowKeyboard(false)
+  // }, [keyboardHide]);
 
   const closeKeyboard = () => {
     Keyboard.dismiss();
@@ -68,26 +59,19 @@ export default function RegistrationScreen() {
   };
   
   const keyboardHide = () => {
-    setIsShowKeyboard(false);
     Keyboard.dismiss();
+    setIsShowKeyboard(false);
     console.log(state);
     setState(initialState);
   };
 
-  // useEffect(() => {
-  //   setIsShowKeyboard(false)
-  // }, [keyboardHide]);
-
   return (
-     
     <TouchableWithoutFeedback onPress={closeKeyboard}>
-      
-        
-            <View style={{ ...styles.container, height: isShowKeyboard ? 375 : 549}}>
-              <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+  
+        <View style={{ ...styles.container, flex: isShowKeyboard ? 0.6 : 0.8}}>
+            <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
              
-                
-          <View style={{...styles.form, width: dimentions, marginBottom: isShowKeyboard ? 16 : 27 }}>
+                <View style={{...styles.form, width: dimentions, marginBottom: isShowKeyboard ? 16 : 27 }}>
                      
                     <View style={styles.header}>
                       <Image source={Avatar} style={styles.avatar} />
@@ -132,38 +116,31 @@ export default function RegistrationScreen() {
                     </View>
                   </View>
                 
-          
-          {!activeInput && (
-            <View style={{ ...styles.down, marginBottom: isShowKeyboard ? 16 : 27 }}>
-              <TouchableOpacity style={styles.btn}
+                {!activeInput && (
+                  <View style={{ ...styles.down, marginBottom: isShowKeyboard ? 16 : 27 }}>
+                    <TouchableOpacity style={styles.btn}
                                 onPress={keyboardHide}
-                                activeOpacity={0.6}>
-                    <Text style={styles.btnTitle}>Зареєструватися</Text>
-              </TouchableOpacity>
-              {/* <Text>Уже есть аккаунт? Войти</Text> */}
-              <View>
-                  <Text style={styles.askLogo}>Вже є акаунт? Увійти</Text>
-              </View>
-            </View>
-          )}
+                                activeOpacity={0.6} >
+                      <Text style={styles.btnTitle}>Зареєструватися</Text>
+                    </TouchableOpacity>
+                    <View>
+                      <Text style={styles.askLogo}>Вже є акаунт? Увійти</Text>
+                    </View>
+                  </View>
+                )}
             </KeyboardAvoidingView>    
-          </View>
+        </View>
            
-      </TouchableWithoutFeedback>
-     
-    )
+    </TouchableWithoutFeedback>    
+  )
 };
-
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.7,
+    // flex: 0.4,
     backgroundColor: "#fff",
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
-    // position: 'relative',
-    // alignItems: 'flex-end',
-    // justifyContent: 'flex-end',
   },
   form: {
     marginHorizontal: 16,
@@ -172,7 +149,7 @@ const styles = StyleSheet.create({
   header: {
     alignItems: 'center',
     marginTop: 92,
-    marginBottom: 16,
+    marginBottom: 14,
   },
   avatar: {
     width: 120,
@@ -181,9 +158,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: -154,
     backgroundColor: '#f6f6f6',
-  },
-  addImage: {
-  
   },
   addAvatar: {
     position: 'absolute',
@@ -202,16 +176,15 @@ const styles = StyleSheet.create({
     padding: 16,
     fontSize: 16,
     fontFamily: 'Roboto-Regular',
-    // justifyContent: 'flex-start',
   },
   seePass: {
-    // color: '#1B4371'
     position: 'absolute',
     top:16,
     }, 
-  down: {
-    
-  },
+  // down: {
+  //   marginBottom: 0,
+  //   paddingBottom: 0,
+  // },
   btn: {
     height: 50,
     borderRadius: 100,
@@ -242,14 +215,16 @@ const styles = StyleSheet.create({
     color: '#1B4371',
     fontSize: 16,
     fontFamily: 'Roboto-Regular',
+    marginBottom: 0,
+    paddingBottom: 0,
   },
   // header: {
   //   alignItems: "center",
   //   marginBottom: 120,
   // },
-  // headerTitle: {
-  //   fontSize: 40,
-  //   color: "#f0f8ff",
-  //   fontFamily: "DMMono-Regular",
-  // },
+  headerTitle: {
+    fontSize: 30,
+    color: "#212121",
+    fontFamily: "Roboto-Regular",
+  },
 });

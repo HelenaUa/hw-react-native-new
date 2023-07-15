@@ -57,7 +57,7 @@ export default function LoginScreen() {
     
     return (
         <TouchableWithoutFeedback onPress={closeKeyboard}>
-            <View style={{ ...styles.container, flex: isShowKeyboard ? 0.58 : 0.75}}>
+            <View style={{ ...styles.container, flex: isShowKeyboard ? 0.5 : 0.65}}>
                 <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}>
              
                   <View style={{...styles.form, width: dimentions, marginBottom: isShowKeyboard ? 16 : 27}}>
