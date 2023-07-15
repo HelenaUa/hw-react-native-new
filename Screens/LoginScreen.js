@@ -95,7 +95,7 @@ export default function LoginScreen() {
                     <TouchableOpacity style={styles.btn}
                                 onPress={keyboardHide}
                                 activeOpacity={0.6}>
-                      <Text style={styles.btnTitle}>Зареєструватися</Text>
+                      <Text style={styles.btnTitle}>Увійти</Text>
                     </TouchableOpacity>
                   <View>
                     <Text style={styles.askLogo}>Немає акаунту? Зареєструватися</Text>
