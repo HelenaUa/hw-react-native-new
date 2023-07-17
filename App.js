@@ -8,11 +8,11 @@ import { PostsScreen } from './Screens/PostsScreen';
 export default function App() {
    return (
      <View style={styles.container}>
-       <ImageBackground style={styles.image} source={require('./assets/images/PhotoBG.png')}>
-         <RegistrationScreen></RegistrationScreen>
-         {/* <LoginScreen></LoginScreen> */}
+       {/* <ImageBackground style={styles.image} source={require('./assets/images/PhotoBG.png')}> */}
+         {/* <RegistrationScreen></RegistrationScreen> */}
+         <LoginScreen></LoginScreen>
          {/* <PostsScreen></PostsScreen> */}
-       </ImageBackground>
+       {/* </ImageBackground> */}
       <StatusBar style="auto" />
     </View>
   );
@@ -23,11 +23,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  image: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    resizeMode: 'cover',
-  },
+  // image: {
+  //   flex: 1,
+  //   justifyContent: 'flex-end',
+  //   resizeMode: 'cover',
+  // },
 });
 
 

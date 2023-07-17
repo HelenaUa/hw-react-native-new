@@ -11,6 +11,7 @@ import {
     TouchableWithoutFeedback,
     Dimensions,
     Pressable,
+    ImageBackground
 } from 'react-native';
 import { useState, useEffect } from 'react';
 import { useFonts } from 'expo-font';
@@ -59,14 +60,20 @@ export default function RegistrationScreen() {
   };
   
   const keyboardHide = () => {
+    setActiveInput('');
     Keyboard.dismiss();
     setIsShowKeyboard(false);
     console.log(state);
-    setState(initialState);
+    setState({
+      name: '',
+      email: '',
+      password: '',
+    });
   };
 
   return (
     <TouchableWithoutFeedback onPress={closeKeyboard}>
+      <ImageBackground style={styles.image} source={require('../assets/images/PhotoBG.png')}>
   
         <View style={{ ...styles.container, flex: isShowKeyboard ? 0.6 : 0.8}}>
             <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
@@ -126,12 +133,17 @@ export default function RegistrationScreen() {
               
             </KeyboardAvoidingView>    
         </View>
-           
+      </ImageBackground>   
     </TouchableWithoutFeedback>    
   )
 };
 
 const styles = StyleSheet.create({
+  image: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    resizeMode: 'cover',
+  },
   container: {
     // flex: 0.4,
     backgroundColor: "#fff",

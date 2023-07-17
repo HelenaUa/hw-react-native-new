@@ -9,6 +9,7 @@ import {
     TouchableOpacity,
     TouchableWithoutFeedback,
     Dimensions,
+    ImageBackground,
 } from 'react-native';
 import { useState, useEffect } from 'react';
 import { useFonts } from 'expo-font';
@@ -49,14 +50,19 @@ export default function LoginScreen() {
   };
 
   const keyboardHide = () => {
+  setActiveInput('');  
   setIsShowKeyboard(false);
   Keyboard.dismiss();
   console.log(state);
-  setState(initialState);
+  setState({
+    email: '',
+    password: '',
+  });
   };
     
     return (
-        <TouchableWithoutFeedback onPress={closeKeyboard}>
+      <TouchableWithoutFeedback onPress={closeKeyboard}>
+        <ImageBackground style={styles.image} source={require('../assets/images/PhotoBG.png')}>
             <View style={{ ...styles.container, flex: isShowKeyboard ? 0.5 : 0.65}}>
                 <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}>
              
@@ -94,20 +100,25 @@ export default function LoginScreen() {
                                 activeOpacity={0.6}>
                       <Text style={styles.btnTitle}>Увійти</Text>
                     </TouchableOpacity>
-                  <View>
-                    <Text style={styles.askLogo}>Немає акаунту? Зареєструватися</Text>
+                    <View>
+                      <Text style={styles.askLogo}>Немає акаунту? Зареєструватися</Text>
+                    </View>
                   </View>
-            </View>
             
                 </KeyboardAvoidingView>    
             </View> 
-        </TouchableWithoutFeedback>
+        </ImageBackground>
+      </TouchableWithoutFeedback>
     )
 };
 
 const styles = StyleSheet.create({
+  image: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    resizeMode: 'cover',
+  },
   container: {
-    // flex: 0.7,
     backgroundColor: "#fff",
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
