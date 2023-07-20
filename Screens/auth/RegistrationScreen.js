@@ -15,9 +15,10 @@ import {
 } from 'react-native';
 import { useState, useEffect } from 'react';
 import { useFonts } from 'expo-font';
-import Avatar from '../assets/images/photo.png';
-import AddAvatar from '../assets/images/add.png';
-import CloseAvatar from '../assets/images/close.png';
+import { useNavigation } from '@react-navigation/native';
+import Avatar from '../../assets/images/photo.png';
+import AddAvatar from '../../assets/images/add.png';
+import CloseAvatar from '../../assets/images/close.png';
 
 const initialState = {
   name: '',
@@ -27,6 +28,7 @@ const initialState = {
 
 
 export default function RegistrationScreen() {
+  const navigation = useNavigation();
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
   const [activeInput, setActiveInput] = useState('');
@@ -43,7 +45,7 @@ export default function RegistrationScreen() {
   }, []);
 
   const [fontsLoaded] = useFonts({
-    'Roboto-Regular': require('../assets/fonts/Roboto-Regular.ttf'),
+    'Roboto-Regular': require('../../assets/fonts/Roboto-Regular.ttf'),
   });
   
   if (!fontsLoaded) {
@@ -73,7 +75,7 @@ export default function RegistrationScreen() {
 
   return (
     <TouchableWithoutFeedback onPress={closeKeyboard}>
-      <ImageBackground style={styles.image} source={require('../assets/images/PhotoBG.png')}>
+      <ImageBackground style={styles.image} source={require('../../assets/images/PhotoBG.png')}>
   
         <View style={{ ...styles.container, flex: isShowKeyboard ? 0.6 : 0.8}}>
             <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
@@ -126,9 +128,9 @@ export default function RegistrationScreen() {
                                 activeOpacity={0.6} >
                       <Text style={styles.btnTitle}>Зареєструватися</Text>
                     </TouchableOpacity>
-                    <View>
+                    <TouchableOpacity onPress={() => {navigation.navigate('LoginScreen')}}>
                       <Text style={styles.askLogo}>Вже є акаунт? Увійти</Text>
-                    </View>
+                    </TouchableOpacity>
                   </View>
               
             </KeyboardAvoidingView>    

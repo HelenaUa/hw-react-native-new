@@ -20,7 +20,7 @@ const initialState = {
 };
 
 
-export default function LoginScreen() {
+export default function LoginScreen({navigation}) {
     const [isShowKeyboard, setIsShowKeyboard] = useState(false);
     const [state, setState] = useState(initialState);
     const [seePass, setSeePass] = useState(true);
@@ -37,7 +37,7 @@ export default function LoginScreen() {
   }, []);
 
   const [fontsLoaded] = useFonts({
-    'Roboto-Regular': require('../assets/fonts/Roboto-Regular.ttf'),
+    'Roboto-Regular': require('../../assets/fonts/Roboto-Regular.ttf'),
   });
   
   if (!fontsLoaded) {
@@ -62,7 +62,7 @@ export default function LoginScreen() {
     
     return (
       <TouchableWithoutFeedback onPress={closeKeyboard}>
-        <ImageBackground style={styles.image} source={require('../assets/images/PhotoBG.png')}>
+        <ImageBackground style={styles.image} source={require('../../assets/images/PhotoBG.png')}>
             <View style={{ ...styles.container, flex: isShowKeyboard ? 0.5 : 0.65}}>
                 <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}>
              
@@ -100,9 +100,9 @@ export default function LoginScreen() {
                                 activeOpacity={0.6}>
                       <Text style={styles.btnTitle}>Увійти</Text>
                     </TouchableOpacity>
-                    <View>
+                    <TouchableOpacity onPress={() => {navigation.navigate('RegistrationScreen')}}>
                       <Text style={styles.askLogo}>Немає акаунту? Зареєструватися</Text>
-                    </View>
+                    </TouchableOpacity>
                   </View>
             
                 </KeyboardAvoidingView>    
