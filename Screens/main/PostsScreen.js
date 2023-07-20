@@ -1,6 +1,5 @@
 import React from 'react';
 // import { moduleName } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 // import { View, Text, StyleSheet } from 'react-native';
 import { CommentsScreen } from '../nested/CommentsScreen';
