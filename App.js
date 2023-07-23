@@ -1,5 +1,6 @@
 // import { StatusBar } from 'expo-status-bar';
 // import { StyleSheet, View } from 'react-native';
+// import { useFonts } from 'expo-font';
 import { NavigationContainer } from "@react-navigation/native";
 // import LoginScreen from './Screens/auth/LoginScreen';
 // import RegistrationScreen from './Screens/auth/RegistrationScreen';
@@ -8,7 +9,17 @@ import { useRoute } from './navigation/router';
 
 
 export default function App() {
-  const routing = useRoute({})
+  const routing = useRoute({});
+
+  // const [fontsLoaded] = useFonts({
+  //   'Roboto-Regular': require('./assets/fonts/Roboto-Regular.ttf'),
+  //   'Roboto-Medium': require('./assets/fonts/Roboto-Medium.ttf'),
+  //   'Roboto-Bold': require('./assets/fonts/Roboto-Bold.ttf'),
+  // });
+  
+  // if (!fontsLoaded) {
+  //   return null;
+  // };
 
    return (
      <NavigationContainer>
