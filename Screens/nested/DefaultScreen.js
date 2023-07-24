@@ -1,5 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
+import { Feather } from "@expo/vector-icons";
 
 export const DefaultScreen = ({ route, navigation }) => {
   const [posts, setPosts] = useState([]);
@@ -26,6 +34,13 @@ export const DefaultScreen = ({ route, navigation }) => {
         />
       </View>
 
+      <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center', marginBottom: 20}} onPress={() => {navigation.navigate("MapScreen")}}>
+        <Feather name='map-pin' size={24} color={'#BDBDBD'}/>
+      </TouchableOpacity>
+      <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center'}} onPress={() => {navigation.navigate("CommentsScreen")}} >
+        <Feather name='message-circle' size={24} color={'#BDBDBD'} />
+        <Text>Comment</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -35,8 +50,5 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     // alignItems: 'center',
-  },
-  photoPost: {
-
   },
 });

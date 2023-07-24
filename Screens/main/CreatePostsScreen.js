@@ -1,27 +1,57 @@
 import React, {useState, useEffect} from 'react';
 import {
+    TouchableWithoutFeedback,
     View,
     Text,
     StyleSheet,
     TouchableOpacity,
-    Image
+    Image,
+    TextInput,
+    Dimensions,
 } from 'react-native';
 import { useFonts } from 'expo-font';
 import { Camera } from 'expo-camera';
 import * as MediaLibrary from "expo-media-library";
-import { FontAwesome } from "@expo/vector-icons";
+import * as Location from "expo-location";
+import { FontAwesome, Feather } from "@expo/vector-icons";
 import { SimpleLineIcons } from '@expo/vector-icons';
+
+const initialState = {
+  photoName: '',
+  place: '',
+};
 
 
 export const CreatePostsScreen = ({navigation}) => {
     const [camera, setCamera] = useState(null);
     const [photo, setPhoto] = useState(null);
     const [isCameraReady, setIsCameraReady] = useState(true);
+    const [type, setType] = useState(Camera.Constants.Type.back);
+
+    const [state, setState] = useState(initialState);
+    const [activeInput, setActiveInput] = useState('');
+
+    const [location, setLocation] = useState(null);
 
     // const [hasPermission, setHasPermission] = useState(null);
     // const [cameraRef, setCameraRef] = useState(null);
-    const [type, setType] = useState(Camera.Constants.Type.back);
 
+    useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        console.log("Permission to access location was denied");
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      const coords = {
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+      };
+      setLocation(coords);
+    })();
+    }, []);
+   
     useEffect(() => {
     (async () => {
       const { status } = await Camera.requestCameraPermissionsAsync();
@@ -53,8 +83,14 @@ export const CreatePostsScreen = ({navigation}) => {
     // setIsCameraReady(true);
     // };
 
+
+    const closeKeyboard = () => {
+        Keyboard.dismiss();
+    };
+
     const sendPhoto = () => {
         setPhoto(null);
+        setLocation(null);
         setIsCameraReady(true);
         navigation.navigate('DefaultScreen', { photo });
     };
@@ -67,6 +103,7 @@ export const CreatePostsScreen = ({navigation}) => {
     }
 
     return (
+        <TouchableWithoutFeedback onPress={closeKeyboard}>
         <View style={styles.container}>
             <Camera style={styles.camera} type={type} ref={setCamera} >
                 {photo && !isCameraReady && (
@@ -76,7 +113,7 @@ export const CreatePostsScreen = ({navigation}) => {
                 )}
 
                 <TouchableOpacity style={styles.buttonCamera} onPress={takePhoto}>
-                    <FontAwesome style={styles.a} name='camera' size={24} color='#BDBDBD'/>
+                    <FontAwesome name='camera' size={24} color={'#BDBDBD'} />
                 </TouchableOpacity>
 
                 <TouchableOpacity
@@ -117,14 +154,45 @@ export const CreatePostsScreen = ({navigation}) => {
                     setPhoto(selectedAsset.uri);
                   }
             }}
-            ></TouchableOpacity> */}
+            >
+            <Text style={{ ...styles.text, marginBottom: 32, maxWidth: 100 }}>
+              {photo ? "Reset" : "Load image"}
+            </Text>
+            </TouchableOpacity> */}
             
+            <View>
+                <TextInput style={{ ...styles.input, marginTop: 16, marginBottom: 16}}
+                    value={state.photoName}
+                    placeholder='Назва...'
+                    onChangeText={(value) => setState((prevState) => ({...prevState, photoName: value}))}
+                    
+                    placeholderTextColor='#BDBDBD'
+                />   
+            </View>
+            <View>
+                <Feather style={styles.a} name='map-pin' size={24} color={'#BDBDBD'}/> 
+                <TextInput style={{ ...styles.input, paddingLeft: 35, borderColor: activeInput==='place'?'#E8E8E8':'#E8E8E8'}}
+                    value={state.place}
+                    placeholder='Місцевість...'
+                    onChangeText={(value) => setState((prevState) => ({...prevState, place: value}))}
+                    onFocus={() => setActiveInput('place')}
+                    placeholderTextColor='#BDBDBD'
+                />   
+            </View>
+
             <View>
                 <TouchableOpacity style={styles.btn} onPress={sendPhoto}>
                     <Text style={styles.btnTitle}>Опубліковати</Text>
                 </TouchableOpacity>
             </View>
+
+            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 20, border: 1, borderColor: '#212121', borderRadius: 20}}>
+                <TouchableOpacity>
+                    <Feather name='trash-2' size={24} color={'#BDBDBD'}/>
+                </TouchableOpacity>
+            </View>
         </View> 
+        </TouchableWithoutFeedback>
     )
 };
 
@@ -159,6 +227,30 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    flipContainer: {
+        position: "absolute",
+        bottom: 10,
+        right: 10
+    },
+    input: {
+        borderBottomWidth: 2,
+        borderColor: '#BDBDBD',
+        backgroundColor: '#E8E8E8',
+        height: 50,
+        borderRadius: 8,
+        color: '#212121',
+        padding: 16,
+        fontSize: 16,
+        marginHorizontal: 16,
+        width: 343,
+        // fontFamily: 'Roboto-Regular',
+    },
+    a: {
+        position: 'absolute',
+        top: 12,
+        left: 20,
+        zIndex: 10,
+    },
     btn: {
         height: 51,
         borderRadius: 100,
@@ -183,14 +275,5 @@ const styles = StyleSheet.create({
         fontSize: 16,
         // fontFamily: 'Roboto-Regular',
     },
-    flipContainer: {
-        position: "absolute",
-        bottom: 10,
-        right: 10
-    },
-//     a: {
-//         color: '#BDBDBD',
-//         zIndex: 11,
-// }
 });
 
