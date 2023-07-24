@@ -9,7 +9,7 @@ import {
 import { useFonts } from 'expo-font';
 import { Camera } from 'expo-camera';
 import * as MediaLibrary from "expo-media-library";
-import { Feather, FontAwesome } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 import { SimpleLineIcons } from '@expo/vector-icons';
 
 
@@ -30,16 +30,6 @@ export const CreatePostsScreen = ({navigation}) => {
       setPhoto(status === "granted");
     })();
     }, []);
-
-
-//      const takePhoto = async () => {
-//     if (cameraRef && cameraIsReady) {
-//       const { uri } = await cameraRef.takePictureAsync();
-//       await MediaLibrary.createAssetAsync(uri);
-//       setPhoto(uri);
-//       setCameraIsReady(false);
-//     }
-//   };
     
     const takePhoto = async () => {
         if (isCameraReady && camera) {
@@ -80,13 +70,13 @@ export const CreatePostsScreen = ({navigation}) => {
         <View style={styles.container}>
             <Camera style={styles.camera} type={type} ref={setCamera} >
                 {photo && !isCameraReady && (
-                  <View style={styles.takePhotoContainer}>
+                  <View style={styles.photoContainer}>
                     <Image source={{ uri: photo }} style={{height: 240, aspectRatio: 4 / 3}} />
                   </View>
                 )}
 
                 <TouchableOpacity style={styles.buttonCamera} onPress={takePhoto}>
-                    <FontAwesome style={styles.a} name='camera' size={24} color='#212121'/>
+                    <FontAwesome style={styles.a} name='camera' size={24} color='#BDBDBD'/>
                 </TouchableOpacity>
 
                 <TouchableOpacity
@@ -151,11 +141,15 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         marginHorizontal: 16,
     },
-    takePhotoContainer: {
-        // position: 'absolute',
-        // top: 0,
-        // left: 0,
-        // borderRadius: 8,
+    photoContainer: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        borderRadius: 8,
+        //  width: "100%",
+        // marginHorizontal: 16,
+        // marginLeft: 8,
+        justifyContent: 'center',
     },
     buttonCamera: {
         width: 60,
@@ -189,10 +183,14 @@ const styles = StyleSheet.create({
         fontSize: 16,
         // fontFamily: 'Roboto-Regular',
     },
-    flipContainer: { position: "absolute", bottom: 10, right: 10 },
-    a: {
-        color: '#212121',
-        zIndex: 11,
-}
+    flipContainer: {
+        position: "absolute",
+        bottom: 10,
+        right: 10
+    },
+//     a: {
+//         color: '#BDBDBD',
+//         zIndex: 11,
+// }
 });
 
