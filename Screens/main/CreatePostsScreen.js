@@ -7,6 +7,7 @@ import {
     TouchableOpacity,
     Image,
     TextInput,
+    Keyboard,
     Dimensions,
 } from 'react-native';
 import { useFonts } from 'expo-font';

@@ -37,7 +37,7 @@ export const PostsScreen = ({ route, navigation }) => {
       <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center', marginBottom: 20}} onPress={() => {navigation.navigate("MapScreen")}}>
         <Feather name='map-pin' size={24} color={'#BDBDBD'}/>
       </TouchableOpacity>
-      <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center'}} onPress={() => {navigation.navigate("CommentsScreen")}} >
+      <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center'}} onPress={() => {navigation.navigate("Коментарі")}} >
         <Feather name='message-circle' size={24} color={'#BDBDBD'} />
         <Text>Comment</Text>
       </TouchableOpacity>

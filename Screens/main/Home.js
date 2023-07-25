@@ -13,7 +13,7 @@ export const  Home = () => {
     return (
             <NestedScreen.Navigator>
               <NestedScreen.Screen name="PostsScreen" component={PostsScreen} />
-              <NestedScreen.Screen name="CommentsScreen" component={CommentsScreen} />
+              <NestedScreen.Screen name="Коментарі" component={CommentsScreen} />
               <NestedScreen.Screen name="MapScreen" component={MapScreen} />
             </NestedScreen.Navigator>
     )
