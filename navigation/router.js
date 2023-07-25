@@ -6,10 +6,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import RegistrationScreen from "../Screens/auth/RegistrationScreen";
 import LoginScreen from "../Screens/auth/LoginScreen";
-import { Home } from '../Screens/Home';
-import { PostsScreen } from '../Screens/main/PostsScreen';
+import { Home } from '../Screens/main/Home';
+// import { PostsScreen } from '../Screens/main/PostsScreen';
 import { CreatePostsScreen } from '../Screens/main/CreatePostsScreen';
 import { ProfileScreen } from '../Screens/main/ProfileScreen';
+
 
 const AuthStack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
@@ -20,15 +21,15 @@ export const useRoute = (isAuth) => {
       <AuthStack.Navigator initialRouteName="LoginScreen">{/* Аналог Routes */}
         <AuthStack.Screen name="RegistrationScreen" component={RegistrationScreen} options={{ headerShown: false }} />{/* Аналог Route */}
         <AuthStack.Screen name="LoginScreen" component={LoginScreen} options={{ headerShown: false }} />
-        <AuthStack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+        {/* <AuthStack.Screen name="Home" component={Home} options={{ headerShown: false }} /> */}
       </AuthStack.Navigator>
     );
   }
   return (
-    <MainTab.Navigator initialRouteName="PostsScreen" screenOptions={{tabBarShowLabel: false}}>
+    <MainTab.Navigator initialRouteName="Home" screenOptions={{tabBarShowLabel: false}}>
       <MainTab.Screen
-        name='PostsScreen'
-        component={PostsScreen}
+        name='Home'
+        component={Home}
         options={{
           tabBarIcon: ({focused, size, color}) => (
             <View style={styles.activeScreen} backgroundColor={focused ? '#FF6C00' : '#fff'} >

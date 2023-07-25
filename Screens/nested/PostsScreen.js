@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { Feather } from "@expo/vector-icons";
 
-export const DefaultScreen = ({ route, navigation }) => {
+export const PostsScreen = ({ route, navigation }) => {
   const [posts, setPosts] = useState([]);
   console.log('route.params', route.params);
   

@@ -92,7 +92,7 @@ export const CreatePostsScreen = ({navigation}) => {
         setPhoto(null);
         setLocation(null);
         setIsCameraReady(true);
-        navigation.navigate('DefaultScreen', { photo });
+        navigation.navigate('PostsScreen', { photo });
     };
 
     if (photo === null) {
