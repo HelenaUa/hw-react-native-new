@@ -36,13 +36,13 @@ export default function LoginScreen({navigation}) {
     return () => subscription?.remove();
   }, []);
 
-  const [fontsLoaded] = useFonts({
-    'Roboto-Regular': require('../../assets/fonts/Roboto-Regular.ttf'),
-  });
+  // const [fontsLoaded] = useFonts({
+  //   'Roboto-Regular': require('../../assets/fonts/Roboto-Regular.ttf'),
+  // });
   
-  if (!fontsLoaded) {
-    return null;
-  };
+  // if (!fontsLoaded) {
+  //   return null;
+  // };
     
   const closeKeyboard = () => {
   Keyboard.dismiss();

@@ -44,13 +44,13 @@ export default function RegistrationScreen() {
     return () => subscription?.remove();
   }, []);
 
-  const [fontsLoaded] = useFonts({
-    'Roboto-Regular': require('../../assets/fonts/Roboto-Regular.ttf'),
-  });
+  // const [fontsLoaded] = useFonts({
+  //   'Roboto-Regular': require('../../assets/fonts/Roboto-Regular.ttf'),
+  // });
   
-  if (!fontsLoaded) {
-    return null;
-  };
+  // if (!fontsLoaded) {
+  //   return null;
+  // };
 
   // useEffect(() => {
   //   setIsShowKeyboard(false)

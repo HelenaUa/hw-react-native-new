@@ -244,7 +244,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginHorizontal: 16,
         width: 343,
-        // fontFamily: 'Roboto-Regular',
+        fontFamily: 'Roboto-Regular',
     },
     a: {
         position: 'absolute',
@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
     btnTitle: {
         color: '#fff',
         fontSize: 16,
-        // fontFamily: 'Roboto-Regular',
+        fontFamily: 'Roboto-Regular',
     },
 });
 
