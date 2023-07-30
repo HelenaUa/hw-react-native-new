@@ -10,32 +10,40 @@ import {
     Keyboard,
     Dimensions,
 } from 'react-native';
-import { useFonts } from 'expo-font';
+// import { useFonts } from 'expo-font';
 import { Camera } from 'expo-camera';
 import * as MediaLibrary from "expo-media-library";
 import * as Location from "expo-location";
 import { FontAwesome, Feather } from "@expo/vector-icons";
-import { SimpleLineIcons } from '@expo/vector-icons';
+// import { SimpleLineIcons } from '@expo/vector-icons';
+import { useSelector } from "react-redux";
 
-const initialState = {
-  photoName: '',
-  place: '',
-};
+import uuid from "react-native-uuid";
+import { collection, addDoc } from "firebase/firestore";
+import { storage, db } from '../../firebase/config';
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { selectUser } from '../../redux/auth/selectors';
+
+// const initialState = {
+//   photoName: '',
+//   place: '',
+// };
 
 
-export const CreatePostsScreen = ({navigation}) => {
-    const [camera, setCamera] = useState(null);
-    const [photo, setPhoto] = useState(null);
-    const [isCameraReady, setIsCameraReady] = useState(true);
-    const [type, setType] = useState(Camera.Constants.Type.back);
+export const CreatePostsScreen = ({ navigation }) => {
+  const { userId } = useSelector(selectUser); 
 
-    const [state, setState] = useState(initialState);
-    const [activeInput, setActiveInput] = useState('');
+  const [camera, setCamera] = useState(null);
+  const [photo, setPhoto] = useState(null);
+  const [isCameraReady, setIsCameraReady] = useState(true);
+  const [type, setType] = useState(Camera.Constants.Type.back);
 
-    const [location, setLocation] = useState(null);
+  // const [state, setState] = useState(initialState);
+  const [activeInput, setActiveInput] = useState('');
 
-    // const [hasPermission, setHasPermission] = useState(null);
-    // const [cameraRef, setCameraRef] = useState(null);
+  const [title, setTitle] = useState("");
+  const [location, setLocation] = useState(null);
+  const [mapLocation, setMapLocation] = useState(null);
 
     useEffect(() => {
     (async () => {
@@ -49,7 +57,8 @@ export const CreatePostsScreen = ({navigation}) => {
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
       };
-      setLocation(coords);
+      // setLocation(coords);
+      setMapLocation(coords);
     })();
     }, []);
    
@@ -93,8 +102,40 @@ export const CreatePostsScreen = ({navigation}) => {
         setPhoto(null);
         setLocation(null);
         setIsCameraReady(true);
+        uploadPostToServer();
         navigation.navigate('PostsScreen', { photo });
-    };
+  };
+
+  const uploadPostToServer = async () => {
+     try {
+      const image = await uploadPhotoToServer();
+      const docRef = await addDoc(collection(db, "posts"), {
+        image,
+        title,
+        allLocations: { mapLocation, location },
+        likes: 0,
+        comments: 0,
+        userId,
+      });
+      console.log("Document written with ID: ", docRef.id);
+    } catch (error) {
+      console.error("Error adding document: ", error);
+      throw error;
+    }
+  };
+  
+  const uploadPhotoToServer = async () => {
+    const responce = await fetch(photo);
+    const file = await responce.blob();
+
+    const uniqueId = uuid.v4();
+    const storageRef = await ref(storage, `images/${uniqueId}`);
+    await uploadBytesResumable(storageRef, file);
+
+    const postImageUrl = await getDownloadURL(storageRef);
+    return postImageUrl;
+  };
+  
 
     if (photo === null) {
     return <View />;
@@ -163,9 +204,9 @@ export const CreatePostsScreen = ({navigation}) => {
             
             <View>
                 <TextInput style={{ ...styles.input, marginTop: 16, marginBottom: 16}}
-                    value={state.photoName}
+                    value={title}
                     placeholder='Назва...'
-                    onChangeText={(value) => setState((prevState) => ({...prevState, photoName: value}))}
+                    onChangeText={setTitle}
                     
                     placeholderTextColor='#BDBDBD'
                 />   
@@ -173,9 +214,9 @@ export const CreatePostsScreen = ({navigation}) => {
             <View>
                 <Feather style={styles.a} name='map-pin' size={24} color={'#BDBDBD'}/> 
                 <TextInput style={{ ...styles.input, paddingLeft: 35, borderColor: activeInput==='place'?'#E8E8E8':'#E8E8E8'}}
-                    value={state.place}
+                    value={location}
                     placeholder='Місцевість...'
-                    onChangeText={(value) => setState((prevState) => ({...prevState, place: value}))}
+                    onChangeText={setLocation}
                     onFocus={() => setActiveInput('place')}
                     placeholderTextColor='#BDBDBD'
                 />   

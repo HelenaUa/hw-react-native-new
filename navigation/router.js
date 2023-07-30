@@ -1,5 +1,11 @@
 import 'react-native-gesture-handler';
 import React from "react";
+
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { authStateChangeUser } from "../redux/auth/operations";
+import { authSingOutUser } from '../redux/auth/operations';
+
 import { View, StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -15,13 +21,20 @@ import { ProfileScreen } from '../Screens/main/ProfileScreen';
 const AuthStack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
 
-export const useRoute = (isAuth) => {
+export const Main = () => {
+  const { isRefreshing: isAuth } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(authStateChangeUser());
+  }, []);
+
+
   if (!isAuth) {
     return (
       <AuthStack.Navigator initialRouteName="LoginScreen">{/* Аналог Routes */}
         <AuthStack.Screen name="RegistrationScreen" component={RegistrationScreen} options={{ headerShown: false }} />{/* Аналог Route */}
         <AuthStack.Screen name="LoginScreen" component={LoginScreen} options={{ headerShown: false }} />
-        {/* <AuthStack.Screen name="Home" component={Home} options={{ headerShown: false }} /> */}
       </AuthStack.Navigator>
     );
   }
@@ -44,7 +57,13 @@ export const useRoute = (isAuth) => {
             alignItems: 'center',
           },
           headerRight: () => (
-            <SimpleLineIcons name='logout' size={24} color='#BDBDBD' style={{ marginRight: 10 }}/>
+            <SimpleLineIcons
+              name='logout'
+              size={24}
+              color='#BDBDBD'
+              style={{ marginRight: 10 }}
+              onPress={() => { dispatch(authSingOutUser()) }}
+            />
           ),
       }}/>
       <MainTab.Screen

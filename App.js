@@ -3,19 +3,35 @@
 // import { useFonts } from 'expo-font';
 import { NavigationContainer } from "@react-navigation/native";
 import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 // import LoginScreen from './Screens/auth/LoginScreen';
 // import RegistrationScreen from './Screens/auth/RegistrationScreen';
 // import { PostsScreen } from './Screens/main/PostsScreen';
 import { useFonts } from 'expo-font';
-import { useRoute } from './navigation/router';
+// import { useRoute } from './navigation/router';
 import { Provider } from "react-redux";
+import { store } from "./redux/store";
+// import { db } from "./firebase/config";
+// import { useDispatch, useSelector } from "react-redux";
+// import { authStateChangeUser } from "./redux/auth/operations";
+import { Main } from "./navigation/router";
+
 
 SplashScreen.preventAutoHideAsync();
 
 
 export default function App() {
-  const routing = useRoute({});
+  // const [user, setUser] = useState(null);
+  // const dispatch = useDispatch();
+  // const { stateChange: isAuth } = useSelector((state) => state.auth);
+  // const routing = useRoute();
+
+  // useEffect(() => {
+  //   dispatch(authStateChangeUser());
+  // }, []);
+
+
+  // db.auth().authStateChangeUser
 
   const [fontsLoaded] = useFonts({
     'Roboto-Regular': require('./assets/fonts/Roboto-Regular.ttf'),
@@ -36,10 +52,13 @@ export default function App() {
     return null;
   };
 
-   return (
-     <NavigationContainer>
-        {routing}
-     </NavigationContainer>
+  return (
+    <Provider store={store} >
+      <NavigationContainer>
+        {/* {routing} */}
+        <Main/>
+      </NavigationContainer>
+    </Provider>  
   );
 };
 

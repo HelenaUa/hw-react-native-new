@@ -6,8 +6,25 @@ const authSlice = createSlice({
         userId: null,
         name: null,
         email: null,
+        avatar: null,
+        isRefreshing: false,
     },
     reducers: {
-        
+        updateUser: (state, { payload }) => ({
+            ...state,
+            userId: payload.userId,
+            name: payload.name,
+            email: payload.email,
+            avatar: payload.avatar,
+        }),
+        stateChange: (state, { payload }) => ({
+            ...state, 
+            isRefreshing: payload.isRefreshing,
+        }),
+        logOut: () => ({ userId: null, name: null, email: null, avatar: null, isRefreshing: false })
     }
-})
+});
+
+export const { updateUser, stateChange, logOut } = authSlice.actions;
+
+export const authReducer = authSlice.reducer;

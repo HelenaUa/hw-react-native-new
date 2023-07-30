@@ -14,11 +14,14 @@ import {
     ImageBackground
 } from 'react-native';
 import { useState, useEffect } from 'react';
-import { useFonts } from 'expo-font';
+import { useDispatch } from "react-redux";
+// import { useFonts } from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
 import Avatar from '../../assets/images/photo.png';
 import AddAvatar from '../../assets/images/add.png';
 import CloseAvatar from '../../assets/images/close.png';
+
+import { authSingUpUser } from '../../redux/auth/operations';
 
 const initialState = {
   name: '',
@@ -29,6 +32,8 @@ const initialState = {
 
 export default function RegistrationScreen() {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
   const [activeInput, setActiveInput] = useState('');
@@ -36,6 +41,8 @@ export default function RegistrationScreen() {
   const [dimentions, setDimentions] = useState(
     Dimensions.get("window").width - 16 * 2
   );
+
+  const [avatar, setAvatar] = useState(null);
 
   useEffect(() => {
     const subscription = Dimensions.addEventListener("change", (window) => {
@@ -62,10 +69,14 @@ export default function RegistrationScreen() {
   };
   
   const keyboardHide = () => {
+    if (!initialState) {
+      return;
+    }
     setActiveInput('');
     Keyboard.dismiss();
     setIsShowKeyboard(false);
     console.log(state);
+    dispatch(authSingUpUser(state));
     setState({
       name: '',
       email: '',

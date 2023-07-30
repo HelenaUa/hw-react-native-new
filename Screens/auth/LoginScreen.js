@@ -12,7 +12,9 @@ import {
     ImageBackground,
 } from 'react-native';
 import { useState, useEffect } from 'react';
-import { useFonts } from 'expo-font';
+// import { useFonts } from 'expo-font';
+import { useDispatch } from "react-redux";
+import { authSingInUser } from '../../redux/auth/operations';
 
 const initialState = {
   email: '',
@@ -20,7 +22,8 @@ const initialState = {
 };
 
 
-export default function LoginScreen({navigation}) {
+export default function LoginScreen({ navigation }) {
+    const dispatch = useDispatch();
     const [isShowKeyboard, setIsShowKeyboard] = useState(false);
     const [state, setState] = useState(initialState);
     const [seePass, setSeePass] = useState(true);
@@ -45,21 +48,25 @@ export default function LoginScreen({navigation}) {
   // };
     
   const closeKeyboard = () => {
-  Keyboard.dismiss();
-  setIsShowKeyboard(false);
+    Keyboard.dismiss();
+    setIsShowKeyboard(false);
   };
 
   const keyboardHide = () => {
-  setActiveInput('');  
-  setIsShowKeyboard(false);
-  Keyboard.dismiss();
-  console.log(state);
-  setState({
-    email: '',
-    password: '',
-  });
+    if (!initialState) {
+    return;
+    };
+    setActiveInput('');  
+    setIsShowKeyboard(false);
+    Keyboard.dismiss();
+    console.log(state);
+    dispatch(authSingInUser(state));
+    setState({
+      email: '',
+      password: '',
+    });
   };
-    
+  
     return (
       <TouchableWithoutFeedback onPress={closeKeyboard}>
         <ImageBackground style={styles.image} source={require('../../assets/images/PhotoBG.png')}>

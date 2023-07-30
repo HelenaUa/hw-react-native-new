@@ -10,7 +10,7 @@ export const MapScreen = () => {
   return (
     <View style={styles.container}>
       <MapView
-        onPress={() => {navigation.navigate("DefaultScreen")}}
+        onPress={() => {navigation.navigate("PostsScreen")}}
         style={styles.map}
         region={{
           ...params,
