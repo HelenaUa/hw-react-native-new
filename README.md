@@ -1,5 +1,80 @@
-hw01 Mobile: https://monosnap.com/file/PV2nzDPkYoMUz6OU2UB8k6H8RG6TAH  
-hw01 Virtual Device: https://monosnap.com/file/Oyto7TwAv32ENwXMfeBe6TDpkMxRmu  
-hw02 Mobile: https://monosnap.com/file/lFBTa3zJPwjRbBgRlQqBejtPI2PyQR  
-hw04 Mobile: https://monosnap.com/file/woEGeQBGtE9nVtCZPOqAtLSj2VHPF4  
-hw05 Mobile: https://monosnap.com/file/OpHwTjTV0catiuNsaU4fW0Y3LgB47c
+hw01 Вступ
+
+1. Встановити expo
+2. Встановити Android Studio
+3. Ініціалізувати проект за допомогою expo (Вибираємо шаблон проекту blank)
+4. Запустити проект
+5. Налаштувати Android Studio
+6. Встановити expo client собі на телефон
+7. Запустити створений проект на телефоні, емуляторі Android  
+   hw01 Mobile: https://monosnap.com/file/PV2nzDPkYoMUz6OU2UB8k6H8RG6TAH  
+   hw01 Virtual Device: https://monosnap.com/file/Oyto7TwAv32ENwXMfeBe6TDpkMxRmu
+
+hw02 Верстка екранів. Робота зі стилями
+
+1. Створити папку Screens
+2. Створити компонент RegistrationScreen
+3. Створити компонент LoginScreen
+4. Створити екран PostsScreen
+5. Додати розмітку форми в компонент RegistrationScreen
+6. Додати розмітку форми в компонент LoginScreen
+7. Додати стилі до компонента RegistrationScreen
+8. Додати стилі до компонента LoginScreen  
+   hw02 Mobile: https://monosnap.com/file/lFBTa3zJPwjRbBgRlQqBejtPI2PyQR
+
+hw03 Обробка подій. Робота з текстовими інпутами та клавіатурою
+
+1. Додати логіку роботи з формою в компонент RegistrationScreen
+2. Додати логіку роботи з формою в компонент LoginScreen
+3. Під час сабміту форм збирати дані з них і виводити в консоль
+4. Додати автозакриття клавіатури по кліку за межами форм (Використовуємо Keyboard.dismiss)
+
+hw04 Навігація
+
+1. Створити екран CreatePostsScreen
+2. Створити екран CommentsScreen
+3. Створити екран ProfileScreen
+4. Створити екран MapScreen
+5. Створити екран Home
+6. Підключити в проект навігацію
+7. Додати в проект переходи між екранами LoginScreen, RegistrationScreen за допомогою компонент  
+   createStackNavigator
+8. З RegistrationScreen можна перейти на LoginScreen, натиснувши на текст Увійти
+9. З LoginScreen можна перейти на RegistrationScreen, натиснувши на текст Зареєструватися
+10. Після сабміту в LoginScreen, RegistrationScreen перекидає на Home, де відразу показується екран PostsScreen
+11. Підключити нижню навігацію, використовуючи createBottomTabNavigator
+12. У нижній навігації створити 3 переходи  
+    hw04 Mobile: https://monosnap.com/file/woEGeQBGtE9nVtCZPOqAtLSj2VHPF4
+
+hw05 Нативні компоненти
+
+1. Підключити камеру в компонент CreatePostsScreen
+2. Під час відкриття екрану CreatePostsScreen активується камера і зображення з неї виводиться в блок з іконкою  
+   камери
+3. По кліку на іконку камери робиться знімок
+4. В інпут з плейсхолдером Назва можна додати назву фото
+5. В інпут з плейсхолдером Місцевість можна додати назву, де було зроблено знімок
+6. Додати визначення геолокації в момент створення посту при кліку на кнопку Опублікувати
+7. Після створення посту повинно перенаправляти на екран PostsScreen
+8. В компоненті окремого посту при кліку на іконку коментарів перекидає на екран CommentsScreen
+9. У компоненті окремого посту під час кліку на іконку геолокації перекидає на екран MapScreen, де можна побачити
+   мапу з маркером, де була зроблена фотографія  
+   hw05 Mobile: https://monosnap.com/file/OpHwTjTV0catiuNsaU4fW0Y3LgB47c
+
+hw06 Redux і Firebase
+
+1. Підключити Redux до проекту
+2. Підключити Firebase до проекту
+3. Додати логіку реєстрації на екрані RegistrationScreen через методи Firebase
+4. Додати логіку логіна на екрані LoginScreen через методи Firebase
+5. Оновити профіль користувача на Firebase та додати туди логін у поле displayName після реєстрації
+6. Зберігати дані про користувача в Redux після реєстрації або логінізації
+7. Додати перевірку, чи залогінений користувач у застосунку чи ні. Якщо залогінений, то відразу перенаправляти на
+   екран PostsScreen, інакше - на екран LoginScreen
+8. Додати логіку Logout на екрані PostsScreen під час натискання на іконку в хедері, використовуючи методи Firebase
+9. Додати логіку завантаження постів у базу даних, використовуючи Firebase та Redux
+10. Додати логіку додавання коментаря під постом, використовуючи Firebase та Redux
+
+hw07 Деплой на сервери expo
+
+1. Викласти проект на сервери expo
