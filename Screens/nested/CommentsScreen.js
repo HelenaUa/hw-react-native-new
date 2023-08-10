@@ -97,18 +97,12 @@ export const CommentsScreen = () => {
   }, []);
 
   return (
-     <TouchableWithoutFeedback onPress={closeKeyboard}>
+    <TouchableWithoutFeedback onPress={closeKeyboard}>
     <View style={{ ...styles.container,  paddingBottom: isShowKeyboard ? 350 : 16 }} onPress={closeKeyboard} >
-      {post?.image && (
-        <Image style={styles.postImage} source={{ uri: post.image }} />
-      )}
+      {post?.image && (<Image style={styles.postImage} source={{ uri: post.image }} />)}
      
       <FlatList
-        contentContainerStyle={{
-          display: "flex",
-          alignItems: "center",
-          flexGrow: 1,
-        }}
+        contentContainerStyle={{display: "flex", alignItems: "center", flexGrow: 1}}
         data={allComments}
         renderItem={({ item }) => {
           return (
@@ -165,16 +159,16 @@ export const CommentsScreen = () => {
           onPress={submit}
         >
           <Feather
-            name="arrow-left"
+            name="check"
             size={25}
             color={"#FFFFFF"}
-            style={{ transform: [{ rotate: "90deg" }] }}
+            // style={{ transform: [{ rotate: "360deg" }] }}
           />
         </TouchableOpacity>
       </View>
 
       </View>
-       </TouchableWithoutFeedback>
+      </TouchableWithoutFeedback>
   );
 };
 
@@ -185,8 +179,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     height: "100%",
     paddingHorizontal: 16,
-    // justifyContent: 'center',
-    // alignItems: 'center',
   },
   postImage: {
     width: "100%",
@@ -227,7 +219,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     borderWidth: 1,
     borderColor: "#E8E8E8",
-    // textAlign: "left",
+    textAlign: "left",
     padding: 16,
   },
 });
