@@ -11,8 +11,8 @@ const NestedScreen = createStackNavigator();
 
 export const  Home = () => {
     return (
-            <NestedScreen.Navigator>
-              <NestedScreen.Screen name="PostsScreen" component={PostsScreen} />
+            <NestedScreen.Navigator initialRouteName='PostsScreen' >
+              <NestedScreen.Screen name="PostsScreen" component={PostsScreen} options={{ headerShown: false }}/>
               <NestedScreen.Screen name="Коментарі" component={CommentsScreen} />
               <NestedScreen.Screen name="MapScreen" component={MapScreen} />
             </NestedScreen.Navigator>
