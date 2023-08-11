@@ -135,8 +135,16 @@ export const CreatePostsScreen = ({ navigation }) => {
     const postImageUrl = await getDownloadURL(storageRef);
     return postImageUrl;
   };
-  
 
+  const deletePost = () => {
+    setPhoto(null);
+    setTitle("");
+    setLocation(null);
+    setCamera(null);
+    setIsCameraReady(true);
+    setActiveInput("");
+  };
+  
     if (photo === null) {
     return <View />;
     }
@@ -229,7 +237,7 @@ export const CreatePostsScreen = ({ navigation }) => {
             </View>
 
             <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 20, border: 1, borderColor: '#212121', borderRadius: 20}}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={deletePost}>
                     <Feather name='trash-2' size={24} color={'#BDBDBD'}/>
                 </TouchableOpacity>
             </View>
