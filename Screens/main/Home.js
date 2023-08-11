@@ -13,8 +13,8 @@ export const  Home = () => {
     return (
             <NestedScreen.Navigator initialRouteName='PostsScreen' >
               <NestedScreen.Screen name="PostsScreen" component={PostsScreen} options={{ headerShown: false }}/>
-              <NestedScreen.Screen name="Коментарі" component={CommentsScreen} />
-              <NestedScreen.Screen name="MapScreen" component={MapScreen} />
+              <NestedScreen.Screen name="Коментарі" component={CommentsScreen} options={{ headerBackTitleVisible: false }}/>
+              <NestedScreen.Screen name="MapScreen" component={MapScreen} options={{ headerBackTitleVisible: false }} />
             </NestedScreen.Navigator>
     )
 };
