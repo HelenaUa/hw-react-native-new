@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Feather } from '@expo/vector-icons';
 // import { Ionicons } from '@expo/vector-icons';
 import { SimpleLineIcons } from '@expo/vector-icons';
+import { useNavigation } from "@react-navigation/native";
 
 import { authSignOutUser } from '../../redux/auth/operations';
 import { selectUser } from '../../redux/auth/selectors';
@@ -24,6 +25,7 @@ import CloseAvatar from '../../assets/images/close.png';
 
 
 export const ProfileScreen = () => {
+    const navigation = useNavigation();
     const dispatch = useDispatch();
     const user = useSelector(selectUser);
     const [posts, setPosts] = useState([]);
@@ -62,15 +64,16 @@ export const ProfileScreen = () => {
                         {/* <View style={styles.avatarBackground}></View> */}
                     </TouchableOpacity>
                 </View> 
-                <View style={{ top: -75, right: -320 }}>
-                <SimpleLineIcons
-                    name='logout'
-                    size={24}
-                    color='#BDBDBD'
-                    // style={{ marginRight: 200 }}
-                    onPress={() => { dispatch(authSignOutUser()) }}
-                />
-                </View>
+                <TouchableOpacity onPress={() => navigation.navigate('Home') }>
+                  <View style={{ top: -75, right: -320 }}>
+                    <SimpleLineIcons
+                      name='logout'
+                      size={24}
+                      color='#BDBDBD'
+                      // style={{ marginRight: 200 }}
+                    />
+                  </View>
+                </TouchableOpacity>
                     
                 <Text style={styles.userName}>{user.name}</Text>
                 

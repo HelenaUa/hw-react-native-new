@@ -8,6 +8,7 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  ScrollView,
   Keyboard,
 } from 'react-native';
 import { useState, useEffect } from "react";
@@ -134,7 +135,8 @@ export const CommentsScreen = () => {
             </View>
           );
         }}
-      />
+        />
+      
       <View style={{ position: "relative", marginBottom: 16 }}>
         <TextInput
           onChangeText={setComment}

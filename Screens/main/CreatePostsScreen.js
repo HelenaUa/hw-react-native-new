@@ -15,6 +15,7 @@ import { Camera } from 'expo-camera';
 import * as MediaLibrary from "expo-media-library";
 import * as Location from "expo-location";
 import { FontAwesome, Feather } from "@expo/vector-icons";
+// import * as ImagePicker from "expo-image-picker";
 // import { SimpleLineIcons } from '@expo/vector-icons';
 import { useSelector } from "react-redux";
 
@@ -183,6 +184,7 @@ export const CreatePostsScreen = ({ navigation }) => {
                 </TouchableOpacity>
             </Camera>
 
+          {/* Витягнути фото з телефону */}
             {/* <TouchableOpacity
                 style={{ maxWidth: 100 }}
                 onPress={async () => {
@@ -205,7 +207,7 @@ export const CreatePostsScreen = ({ navigation }) => {
                   }
             }}
             >
-            <Text style={{ ...styles.text, marginBottom: 32, maxWidth: 100 }}>
+            <Text style={{ fontSize: 18, color: "#BDBDBD", fontFamily: "Roboto-Regular", marginLeft: 16 }}>
               {photo ? "Reset" : "Load image"}
             </Text>
             </TouchableOpacity> */}
@@ -220,7 +222,7 @@ export const CreatePostsScreen = ({ navigation }) => {
                 />   
             </View>
             <View>
-                <Feather style={styles.a} name='map-pin' size={24} color={'#BDBDBD'}/> 
+                <Feather style={styles.mapIcon} name='map-pin' size={24} color={'#BDBDBD'}/> 
                 <TextInput style={{ ...styles.input, paddingLeft: 35, borderColor: activeInput==='place'?'#E8E8E8':'#E8E8E8'}}
                     value={location}
                     placeholder='Місцевість...'
@@ -248,68 +250,65 @@ export const CreatePostsScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+      flex: 1,
     },
     camera: {
-        height: 240,
-        marginTop: 32,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#E8E8E8',
-        borderRadius: 8,
-        marginHorizontal: 16,
+      height: 240,
+      marginTop: 32,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#E8E8E8',
+      borderRadius: 8,
+      marginHorizontal: 16,
     },
     photoContainer: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        borderRadius: 8,
-        //  width: "100%",
-        // marginHorizontal: 16,
-        // marginLeft: 8,
-        justifyContent: 'center',
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      borderRadius: 8,
+      justifyContent: 'center',
     },
     buttonCamera: {
-        width: 60,
-        height: 60,
-        borderRadius: 50,
-        backgroundColor: '#fff',
-        justifyContent: 'center',
-        alignItems: 'center',
+      width: 60,
+      height: 60,
+      borderRadius: 50,
+      backgroundColor: '#fff',
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     flipContainer: {
-        position: "absolute",
-        bottom: 10,
-        right: 10
+      position: "absolute",
+      bottom: 10,
+      right: 10
     },
     input: {
-        borderBottomWidth: 2,
-        borderColor: '#BDBDBD',
-        backgroundColor: '#E8E8E8',
-        height: 50,
-        borderRadius: 8,
-        color: '#212121',
-        padding: 16,
-        fontSize: 16,
-        marginHorizontal: 16,
-        width: 343,
-        fontFamily: 'Roboto-Regular',
+      borderBottomWidth: 2,
+      borderColor: '#BDBDBD',
+      backgroundColor: '#E8E8E8',
+      height: 50,
+      borderRadius: 8,
+      color: '#212121',
+      padding: 16,
+      fontSize: 16,
+      marginHorizontal: 16,
+      width: 343,
+      fontFamily: 'Roboto-Regular',
     },
-    a: {
-        position: 'absolute',
-        top: 12,
-        left: 20,
-        zIndex: 10,
+    mapIcon: {
+      position: 'absolute',
+      top: 12,
+      left: 20,
+      zIndex: 10,
     },
     btn: {
-        height: 51,
-        borderRadius: 100,
-        borderWidth: 1,
-        marginTop: 32,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginHorizontal: 16,
-        ...Platform.select({
+      height: 51,
+      borderRadius: 100,
+      borderWidth: 1,
+      marginTop: 32,
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginHorizontal: 16,
+      ...Platform.select({
         ios: {
           backgroundColor: '#FF6C00',
           borderColor: 'transparent',
@@ -321,9 +320,9 @@ const styles = StyleSheet.create({
     }),
     },
     btnTitle: {
-        color: '#fff',
-        fontSize: 16,
-        fontFamily: 'Roboto-Regular',
+      color: '#fff',
+      fontSize: 16,
+      fontFamily: 'Roboto-Regular',
     },
 });
 

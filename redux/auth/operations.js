@@ -1,5 +1,5 @@
-import { updateUser, stateChange, logOut } from "./authSlice";
-// import { async } from "@firebase/util";
+import { updateUser, updateUserAvatar, stateChange, logOut } from "./authSlice";
+import { async } from "@firebase/util";
 import {
     createUserWithEmailAndPassword,
     updateProfile,
@@ -55,6 +55,18 @@ export const authSingInUser = ({email, password}) => async (dispatch) => {
         return false;
     }
 };
+
+// Оновлення аватара
+export const updateAvatar = ({ avatar }) => async (dispatch) => {
+    try {
+      const user = auth.currentUser;
+      await updateProfile(user, { photoURL: avatar });
+      dispatch(updateUserAvatar({avatar})
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 // Зміна стану аутентифікації користувача
 export const authStateChangeUser = () => async (dispatch) => {

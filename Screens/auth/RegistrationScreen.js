@@ -16,12 +16,19 @@ import {
 import { useState, useEffect } from 'react';
 import { useDispatch } from "react-redux";
 // import { useFonts } from 'expo-font';
+import { Feather } from "@expo/vector-icons";
+import * as ImagePicker from "expo-image-picker";
+import uuid from "react-native-uuid";
 import { useNavigation } from '@react-navigation/native';
 import Avatar from '../../assets/images/photo.png';
 import AddAvatar from '../../assets/images/add.png';
 import CloseAvatar from '../../assets/images/close.png';
 
 import { authSingUpUser } from '../../redux/auth/operations';
+
+import { collection, addDoc } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+import { storage, db } from '../../firebase/config';
 
 const initialState = {
   name: '',
@@ -68,20 +75,32 @@ export default function RegistrationScreen() {
     setIsShowKeyboard(false);
   };
   
-  const keyboardHide = () => {
+  const keyboardHide = async () => {
     if (!initialState) {
       return;
     }
+    const avatarUrl = await uploadAvatarToServer();
     setActiveInput('');
     Keyboard.dismiss();
     setIsShowKeyboard(false);
     console.log(state);
-    dispatch(authSingUpUser(state));
-    setState({
-      name: '',
-      email: '',
-      password: '',
-    });
+    dispatch(authSingUpUser({ name, email, password, avatar: avatarUrl }));
+    setState(initialState);
+  };
+
+  const uploadAvatarToServer = async () => {
+    if (!avatar) {
+      return null;
+    }
+    const responce = await fetch(avatar);
+    const file = await responce.blob();
+
+    const uniqueId = uuid.v4();
+    const storageRef = ref(storage, `avatars/${uniqueId}`);
+    await uploadBytesResumable(storageRef, file);
+
+    const getImageUrl = await getDownloadURL(storageRef);
+    return getImageUrl;
   };
 
   return (
@@ -93,14 +112,38 @@ export default function RegistrationScreen() {
              
                 <View style={{...styles.form, width: dimentions, marginBottom: isShowKeyboard ? 16 : 27 }}>
                      
-                    <View style={styles.header}>
+                  <View style={styles.avatarBox}>
+                    <TouchableOpacity
+                      onPress={async () => {
+                        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+                        if (status !== "granted") {
+                        console.log("Permission denied");
+                        return;
+                        }
+                        const result = await ImagePicker.launchImageLibraryAsync();
+                        if (!result.canceled && result.assets.length > 0) {
+                        const selectedAsset = result.assets[0];
+                        setAvatar(selectedAsset.uri);
+                        }
+                      }}
+                    >
+                      <Image
+                        source={{ uri: avatar }}
+                        style={{ width: "100%", height: "100%", borderRadius: 16 }}
+                      />
+                      <Feather name="plus-circle" style={styles.avatarAdd} size={25} />
+                   </TouchableOpacity>
+                  </View>
+              
+                    {/* <View style={styles.header}>
                       <Image source={Avatar} style={styles.avatar} />
                       <Pressable style={styles.addImage}>
                         <Image source={Avatar ? CloseAvatar : AddAvatar} style={styles.addAvatar} />
                       </Pressable>
                       <Text style={{ fontFamily: 'Roboto-Regular', fontSize: 30, color: '#212121' }}>Реєстрація</Text>
-                    </View>
-              
+                    </View> */}
+              <Text style={{ fontFamily: 'Roboto-Regular', fontSize: 30, color: '#212121', marginTop: 100, marginLeft: 90 }}>Реєстрація</Text>
+              <View style={{marginTop: 33, gap: 16}}>
                     <View>
                       <TextInput style={{ ...styles.input, borderColor:activeInput==='login'?'#FF6C00':'#f6f6f6'}}
                                 value={state.name}
@@ -131,7 +174,8 @@ export default function RegistrationScreen() {
                       />
                       <Text style={{ ...styles.seePass, color: '#1B4371', right: 32}} onPress ={()=> setSeePass(false)} >Показати</Text>
                     </View>
-                  </View>
+              </View>
+              </View>
                 
                   <View style={{ ...styles.down, marginBottom: isShowKeyboard ? 16 : 27 }}>
                     <TouchableOpacity style={styles.btn}
@@ -165,6 +209,7 @@ const styles = StyleSheet.create({
   },
   form: {
     marginHorizontal: 16,
+    // marginTop: 35,
     gap: 16,
   },
   header: {
@@ -187,6 +232,29 @@ const styles = StyleSheet.create({
     top: -78,
     right: -72,
   },
+  
+  avatarBox: {
+    position: "absolute",
+    top: "0%",
+    left: "50%",
+    transform: [{ translateX: -63 }, { translateY: -60 }],
+    width: 120,
+    height: 120,
+    backgroundColor: "#F6F6F6",
+    borderRadius: 16,
+  },
+  avatarAdd: {
+    position: "absolute",
+    right: "-50%",
+    bottom: 10,
+    transform: [{ translateX: -46 }],
+    color: "#FF6C00",
+    backgroundColor: "#FFF",
+    borderRadius: 100,
+    // width: "50%",
+    // height: "50%",
+  },
+
   input: {
     borderWidth: 1,
     borderColor: '#E8E8E8',
