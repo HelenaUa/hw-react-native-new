@@ -66,11 +66,11 @@ export const updateAvatar = ({ avatar }) => async (dispatch) => {
     } catch (error) {
       console.log(error);
     }
-  };
+};
 
 // Зміна стану аутентифікації користувача
 export const authStateChangeUser = () => async (dispatch) => {
-  onAuthStateChanged(auth, (user) => {
+  await onAuthStateChanged(auth, (user) => {
     if (user) {
       dispatch(
         updateUser({

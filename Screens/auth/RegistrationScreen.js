@@ -80,11 +80,11 @@ export default function RegistrationScreen() {
       return;
     }
     const avatarUrl = await uploadAvatarToServer();
+    dispatch(authSingUpUser({ name, email, password, avatar: avatarUrl }));
     setActiveInput('');
     Keyboard.dismiss();
     setIsShowKeyboard(false);
     console.log(state);
-    dispatch(authSingUpUser({ name, email, password, avatar: avatarUrl }));
     setState(initialState);
   };
 
@@ -142,8 +142,8 @@ export default function RegistrationScreen() {
                       </Pressable>
                       <Text style={{ fontFamily: 'Roboto-Regular', fontSize: 30, color: '#212121' }}>Реєстрація</Text>
                     </View> */}
-              <Text style={{ fontFamily: 'Roboto-Regular', fontSize: 30, color: '#212121', marginTop: 100, marginLeft: 90 }}>Реєстрація</Text>
-              <View style={{marginTop: 33, gap: 16}}>
+                <Text style={{ fontFamily: 'Roboto-Regular', fontSize: 30, color: '#212121', marginTop: 100, marginLeft: 90 }}>Реєстрація</Text>
+                <View style={{marginTop: 33, gap: 16}}>
                     <View>
                       <TextInput style={{ ...styles.input, borderColor:activeInput==='login'?'#FF6C00':'#f6f6f6'}}
                                 value={state.name}
@@ -209,7 +209,6 @@ const styles = StyleSheet.create({
   },
   form: {
     marginHorizontal: 16,
-    // marginTop: 35,
     gap: 16,
   },
   header: {
@@ -251,8 +250,6 @@ const styles = StyleSheet.create({
     color: "#FF6C00",
     backgroundColor: "#FFF",
     borderRadius: 100,
-    // width: "50%",
-    // height: "50%",
   },
 
   input: {
@@ -271,8 +268,6 @@ const styles = StyleSheet.create({
     top:16,
     }, 
   // down: {
-  //   marginBottom: 0,
-  //   paddingBottom: 0,
   // },
   btn: {
     height: 50,

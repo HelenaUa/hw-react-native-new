@@ -9,7 +9,7 @@ import {
   ScrollView,
 } from 'react-native';
 import { Feather } from "@expo/vector-icons";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useRoute } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -19,8 +19,10 @@ import { selectUser } from '../../redux/auth/selectors';
 
 
 export const PostsScreen = () => {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
   const user = useSelector(selectUser);
+  console.log(user);
   const [posts, setPosts] = useState([]);
   // console.log('route.params', route.params);
   
@@ -35,7 +37,10 @@ export const PostsScreen = () => {
     onSnapshot(collection(db, "posts"), (snapshot) => {
       setPosts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
+    console.log(setPosts);
   }, [setPosts]);
+  // console.log(setPosts);
+  // console.log(posts);
     
   return (
     <View style={styles.container}>

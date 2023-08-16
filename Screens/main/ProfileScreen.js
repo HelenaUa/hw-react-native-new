@@ -28,6 +28,7 @@ export const ProfileScreen = () => {
     const navigation = useNavigation();
     const dispatch = useDispatch();
     const user = useSelector(selectUser);
+    console.log(user);
     const [posts, setPosts] = useState([]);
 
     const userPosts = async () => {
@@ -127,7 +128,7 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'flex-end',
       resizeMode: 'cover',
-    //      position: "relative",
+    // position: "relative",
     // width: "100%",
     // height: "100%",
     },
@@ -135,10 +136,10 @@ const styles = StyleSheet.create({
     //   flex: 1,
     //   justifyContent: 'center',
     //   alignItems: 'center',
-    //     position: 'relative',
-    //     backgroundColor: "#fff",
-    // borderTopLeftRadius: 50,
-    // borderTopRightRadius: 50,
+    //   position: 'relative',
+    //   backgroundColor: "#fff",
+    //   borderTopLeftRadius: 50,
+    //   borderTopRightRadius: 50,
       position: "absolute",
       top: 147,
       display: "flex",
