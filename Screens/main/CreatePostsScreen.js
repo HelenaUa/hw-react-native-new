@@ -10,13 +10,10 @@ import {
     Keyboard,
     Dimensions,
 } from 'react-native';
-// import { useFonts } from 'expo-font';
 import { Camera } from 'expo-camera';
 import * as MediaLibrary from "expo-media-library";
 import * as Location from "expo-location";
 import { FontAwesome, Feather } from "@expo/vector-icons";
-// import * as ImagePicker from "expo-image-picker";
-// import { SimpleLineIcons } from '@expo/vector-icons';
 import { useSelector } from "react-redux";
 
 import uuid from "react-native-uuid";
@@ -81,19 +78,6 @@ export const CreatePostsScreen = ({ navigation }) => {
           setIsCameraReady(false);  
         }
     };
-
-    // const [fontsLoaded] = useFonts({
-    // 'Roboto-Regular': require('../../assets/fonts/Roboto-Regular.ttf'),
-    // });
-  
-    // if (!fontsLoaded) {
-    //   return null;
-    // };
-
-    // const handleCameraReady = () => {
-    // setIsCameraReady(true);
-    // };
-
 
     const closeKeyboard = () => {
         Keyboard.dismiss();

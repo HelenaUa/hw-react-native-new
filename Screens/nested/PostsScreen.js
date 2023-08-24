@@ -3,7 +3,6 @@ import {
   View,
   Text,
   StyleSheet,
-  FlatList,
   Image,
   TouchableOpacity,
   ScrollView,
@@ -25,13 +24,6 @@ export const PostsScreen = () => {
   console.log(user);
   const [posts, setPosts] = useState([]);
   // console.log('route.params', route.params);
-  
-  // useEffect(() => {
-  //   if (route.params) {
-  //     setPosts((prevState) => [...prevState, route.params]);
-  //   } 
-  // }, [route.params]);
-  // console.log('posts', posts);
   
   useEffect(() => {
     onSnapshot(collection(db, "posts"), (snapshot) => {
@@ -56,18 +48,6 @@ export const PostsScreen = () => {
           <Text style={styles.email}>{user.email}</Text>
         </View>
       </View>
-
-      {/* <View style={{flex: 1, justifyContent: 'center'}}>
-        <FlatList
-          data={posts}
-          keyExtractor={(item, indx) => indx.toString()}
-          renderItem={({ item }) => (
-            <View style={{marginTop: 8, justifyContent: 'center', alignItems: 'center'}}>
-              <Image source={{uri: item.photo}} style={{width: 343, height: 240}} />
-            </View>
-          )}
-        />
-      </View> */}
 
        {posts.length !== 0 && (
         <ScrollView
@@ -107,13 +87,6 @@ export const PostsScreen = () => {
         </ScrollView>
       )}
       
-      {/* <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center', marginBottom: 20}} onPress={() => {navigation.navigate("MapScreen")}}>
-        <Feather name='map-pin' size={24} color={'#BDBDBD'}/>
-      </TouchableOpacity>
-      <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center'}} onPress={() => {navigation.navigate("Коментарі")}} >
-        <Feather name='message-circle' size={24} color={'#BDBDBD'} />
-        <Text>Comment</Text>
-      </TouchableOpacity> */}
     </View>
   );
 };
@@ -121,8 +94,6 @@ export const PostsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
     paddingHorizontal: 16,
   },
   user: {

@@ -8,7 +8,6 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  ScrollView,
   Keyboard,
 } from 'react-native';
 import { useState, useEffect } from "react";

@@ -10,12 +10,10 @@ import {
     TouchableOpacity,
     TouchableWithoutFeedback,
     Dimensions,
-    Pressable,
     ImageBackground
 } from 'react-native';
 import { useState, useEffect } from 'react';
 import { useDispatch } from "react-redux";
-// import { useFonts } from 'expo-font';
 import { Feather } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import uuid from "react-native-uuid";
@@ -57,18 +55,6 @@ export default function RegistrationScreen() {
     });
     return () => subscription?.remove();
   }, []);
-
-  // const [fontsLoaded] = useFonts({
-  //   'Roboto-Regular': require('../../assets/fonts/Roboto-Regular.ttf'),
-  // });
-  
-  // if (!fontsLoaded) {
-  //   return null;
-  // };
-
-  // useEffect(() => {
-  //   setIsShowKeyboard(false)
-  // }, [keyboardHide]);
 
   const closeKeyboard = () => {
     Keyboard.dismiss();
@@ -135,13 +121,6 @@ export default function RegistrationScreen() {
                    </TouchableOpacity>
                   </View>
               
-                    {/* <View style={styles.header}>
-                      <Image source={Avatar} style={styles.avatar} />
-                      <Pressable style={styles.addImage}>
-                        <Image source={Avatar ? CloseAvatar : AddAvatar} style={styles.addAvatar} />
-                      </Pressable>
-                      <Text style={{ fontFamily: 'Roboto-Regular', fontSize: 30, color: '#212121' }}>Реєстрація</Text>
-                    </View> */}
                 <Text style={{ fontFamily: 'Roboto-Regular', fontSize: 30, color: '#212121', marginTop: 100, marginLeft: 90 }}>Реєстрація</Text>
                 <View style={{marginTop: 33, gap: 16}}>
                     <View>
@@ -177,7 +156,7 @@ export default function RegistrationScreen() {
               </View>
               </View>
                 
-                  <View style={{ ...styles.down, marginBottom: isShowKeyboard ? 16 : 27 }}>
+                  <View style={{ marginBottom: isShowKeyboard ? 16 : 27 }}>
                     <TouchableOpacity style={styles.btn}
                                 onPress={keyboardHide}
                                 activeOpacity={0.6} >
@@ -251,7 +230,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
     borderRadius: 100,
   },
-
   input: {
     borderWidth: 1,
     borderColor: '#E8E8E8',
@@ -267,8 +245,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top:16,
     }, 
-  // down: {
-  // },
   btn: {
     height: 50,
     borderRadius: 100,
@@ -302,10 +278,6 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     paddingBottom: 0,
   },
-  // header: {
-  //   alignItems: "center",
-  //   marginBottom: 120,
-  // },
   headerTitle: {
     fontSize: 30,
     color: "#212121",

@@ -12,7 +12,6 @@ import {
     ImageBackground,
 } from 'react-native';
 import { useState, useEffect } from 'react';
-// import { useFonts } from 'expo-font';
 import { useDispatch } from "react-redux";
 import { authSingInUser } from '../../redux/auth/operations';
 
@@ -38,14 +37,6 @@ export default function LoginScreen({ navigation }) {
     });
     return () => subscription?.remove();
   }, []);
-
-  // const [fontsLoaded] = useFonts({
-  //   'Roboto-Regular': require('../../assets/fonts/Roboto-Regular.ttf'),
-  // });
-  
-  // if (!fontsLoaded) {
-  //   return null;
-  // };
     
   const closeKeyboard = () => {
     Keyboard.dismiss();

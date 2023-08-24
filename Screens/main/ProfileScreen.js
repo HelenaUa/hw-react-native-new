@@ -10,9 +10,7 @@ import {
 } from 'react-native';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-// import uuid from 'react-native-uuid';
 import { Feather } from '@expo/vector-icons';
-// import { Ionicons } from '@expo/vector-icons';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 
@@ -128,18 +126,8 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'flex-end',
       resizeMode: 'cover',
-    // position: "relative",
-    // width: "100%",
-    // height: "100%",
     },
     container: {
-    //   flex: 1,
-    //   justifyContent: 'center',
-    //   alignItems: 'center',
-    //   position: 'relative',
-    //   backgroundColor: "#fff",
-    //   borderTopLeftRadius: 50,
-    //   borderTopRightRadius: 50,
       position: "absolute",
       top: 147,
       display: "flex",
