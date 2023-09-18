@@ -163,7 +163,6 @@ export const CommentsScreen = () => {
             name="check"
             size={25}
             color={"#FFFFFF"}
-            // style={{ transform: [{ rotate: "360deg" }] }}
           />
         </TouchableOpacity>
       </View>

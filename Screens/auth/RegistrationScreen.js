@@ -181,7 +181,6 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   container: {
-    // flex: 0.4,
     backgroundColor: "#fff",
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,

@@ -7,18 +7,6 @@ import { getFirestore } from "firebase/firestore";
 // Функція для підключення сховища файлів в проект
 import { getStorage } from "firebase/storage";
 
-
-// // Your web app's Firebase configuration
-// const firebaseConfig = {
-//   apiKey: "AIzaSyB7qeeDL8LRuGIm3XOdOtQ69lzTuxO4la4",
-//   authDomain: "my-react-native-e3f50.firebaseapp.com",
-//   projectId: "my-react-native-e3f50",
-//   storageBucket: "my-react-native-e3f50.appspot.com",
-//   messagingSenderId: "857749396025",
-//   appId: "1:857749396025:web:aae5a6f6b6d956a8a04be8",
-//   measurementId: "G-HMD5PHZ40N"
-// };
-
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
